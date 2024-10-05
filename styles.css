@@ -1,0 +1,152 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #f8f9fa;
+    color: #333;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    height: 100%;
+    margin: 20px;
+    background-color: white;
+    border: 1px solid #d3d3d3;
+    border-radius: 6px;
+}
+
+.sidebar {
+    width: 30%;
+    background-color: #f4f5f7;
+    padding: 20px;
+    border-right: 1px solid #d3d3d3;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.content {
+    width: 70%;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    font-size: 1.2rem;
+    color: #343a40;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+.submissionOutline {
+    margin-bottom: 20px;
+}
+
+.submissionOutlineHeader {
+    background-color: #f4f5f7;
+    padding: 15px;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+.submissionOutline--section {
+    margin-top: 20px;
+}
+
+.submissionOutine--sectionHeading {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+.submissionOutlineHeader--totalPoints {
+    font-size: 1rem;
+    color: #495057;
+    margin-bottom: 10px;
+}
+
+#student-name, #total-points, #autograder-score {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.submissionOutlineTestCases--failed a {
+    color: #dc3545;
+}
+
+.submissionOutlineTestCases--passed a {
+    color: #28a745;
+}
+
+.testCase {
+    margin-bottom: 20px;
+}
+
+.testCase--header {
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #e9ecef;
+    border: 1px solid #d3d3d3;
+    display: flex;
+    justify-content: space-between;
+}
+
+.testCase-failed .testCase--header {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.testCase-passed .testCase--header {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.testCase--body {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border: 1px solid #d3d3d3;
+    font-family: monospace;
+    white-space: pre-wrap;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+pre code {
+    display: block;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Flex spacing */
+.flexSpaceBetween {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .sidebar, .content {
+        width: 100%;
+    }
+}
