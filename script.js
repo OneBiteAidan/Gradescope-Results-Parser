@@ -1,66 +1,131 @@
-document.getElementById('fileInput').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (!file) {
-        alert("No file selected");
-        return;
-    }
+document.addEventListener('DOMContentLoaded', function() {
+    const placeholder = document.getElementById('placeholder');
 
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        const content = e.target.result;
-        try {
-            const results = JSON.parse(content);
-            displayResults(results);
-        } catch (error) {
-            alert("Invalid JSON file");
+    document.getElementById('loadFileButton').addEventListener('click', function() {
+        document.getElementById('fileInput').click();
+    });
+
+    placeholder.addEventListener('click', function() {
+        document.getElementById('fileInput').click();
+    });
+    
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (!file) {
+            alert("No file selected");
+            return;
         }
-    };
+    
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const content = e.target.result;
+            try {
+                const results = JSON.parse(content);
+                displayResults(results);
+            } catch (error) {
+                alert("Invalid JSON file");
+                console.error(error);
+    
+            }
+        };
+    
+        document.querySelector('.programmingAssignmentSubmissionViewer').classList.remove('hidden');
+        placeholder.classList.add('hidden');
 
-    document.querySelector('.content').classList.remove('hidden');
-
-    reader.readAsText(file);
+    
+        reader.readAsText(file);
+    });
+    
 });
 
+
 function displayResults(results) {
-    // Update student name and autograder name
-    document.getElementById('student-name').textContent = results.student;
-    document.getElementById('autograder-name').textContent = results.autograder;
+    // Update the assignment name
+    // document.querySelector('submissionOutlineHeader--assignmentTitle').textContent = results.assignment;
+
+    // Update the group name (Single student in our case)
+    // document.querySelector('submissionOutline--groupMember').textContent = results.student;
 
     // Update total points and autograder score
-    document.getElementById('total-points').textContent = results.score + " / " + getMaxScore(results.tests);
-    document.getElementById('autograder-score').textContent = results.score + " / " + results.score;
+    document.querySelector('.submissionOutlineHeader--totalPoints').textContent = calculateScore(results) + " / " + calculateMaxScore(results);
 
-    const failedTests = document.getElementById('failed-tests');
-    const passedTests = document.getElementById('passed-tests');
+    // Initialize the failed and passed test lists
+    const failedTests = document.querySelector('.submissionOutline--failedTests');
+    const passedTests = document.querySelector('.submissionOutine--passedTests');
     failedTests.innerHTML = '';
     passedTests.innerHTML = '';
 
     // List failed and passed tests
     results.tests.forEach(test => {
         const li = document.createElement('li');
-        li.textContent = test.name + " (" + (test.score || 0) + "/" + test.max_score + ")";
+
+        // Create the <a> element
+        const a = document.createElement('a');
+
+        if (test.score === null) {
+            testName = test.name
+        } else {
+            testName = test.name + " (" + (test.score || 0) + "/" + test.max_score + ")";
+        }
+
+        testName = test.name + " (" + (test.score || 0) + "/" + test.max_score + ")";
+        a.textContent = testName;
+        a.href = "#" + testName;
+
+        // Append the <a> element to the <li> element
+        li.appendChild(a);
+
         if (test.status === 'failed') {
-            li.classList.add('failed');
+            li.classList.add('submissionOutlineTestCases--failed');
             failedTests.appendChild(li);
         } else {
-            li.classList.add('passed');
+            li.classList.add('submissionOutlineTestCases--passed');
             passedTests.appendChild(li);
         }
     });
 
     // Display autograder output
-    const outputDiv = document.getElementById('autograder-output');
-    outputDiv.innerHTML = results.tests.map(test => formatTestOutput(test)).join('\n');
-}
+    const autograderOutput = `
+        <li class="testCase">
+            <div class="testCase--header" title="only visible to instructors (for debugging purposes)">Autograder Output (hidden from students)</div>
+            <div class="testCase--body">
+                ${results.output}
+            </div>
+        </li>
+    `
 
-function getMaxScore(tests) {
-    return tests.reduce((max, test) => max + (test.max_score || 0), 0);
+    // Display the test cases
+    const outputDiv = document.querySelector('.testCases');
+    outputDiv.innerHTML = autograderOutput + results.tests.map(test => formatTestOutput(test)).join(' ');
 }
 
 function formatTestOutput(test) {
-    return `Test: ${test.name}\n` +
-           `Score: ${test.score || 0} / ${test.max_score}\n` +
-           `Status: ${test.status}\n` +
-           `Output: ${test.output}\n` +
-           `------------------------------------\n`;
+    return `
+        <li class="testCase testCase-${test.status}">
+            <div class="testCase--header 1-flexSpaceBetween">
+                <a id="${test.name}">${test.name + " (" + (test.score || 0) + "/" + test.max_score + ")"}</a>
+            </div>
+            <div class="testCase--body">
+                ${test.output}
+            </div>
+        </li>
+
+    `;
+
+}
+
+function calculateScore(results) {
+    score = 0;
+    for (const test in results.tests) {
+        score += test.score || 0;
+    }
+    return score;
+}
+
+function calculateMaxScore(results) {
+    maxScore = 0;
+    for (const test in results.tests) {
+        maxScore += test.max_score;
+    }
+    return maxScore;
 }

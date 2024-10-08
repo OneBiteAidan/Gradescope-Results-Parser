@@ -2,53 +2,37 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: "Open Sans", sans-serif;
 }
 
 body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    background-color: #f8f9fa;
-    color: #333;
+    background-color: white;
     height: 100vh;
+    flex-direction: row-reverse;
 }
 
 .container {
     display: flex;
-    width: 80%;
+    width: 100%;
     height: 100%;
-    margin: 20px;
     background-color: white;
-    border: 1px solid #d3d3d3;
-    border-radius: 6px;
 }
 
 .sidebar {
     width: 30%;
     background-color: #f4f5f7;
-    padding: 20px;
-    border-right: 1px solid #d3d3d3;
+    border-left: 1px solid #d3d3d3;
     overflow-y: auto;
     height: 100%;
 }
 
-.content {
-    width: 70%;
-    padding: 20px;
-}
-
-h1, h2, h3 {
-    font-size: 1.2rem;
-    color: #343a40;
-}
-
-h1 {
-    font-size: 1.5rem;
-}
-
 .submissionOutline {
-    margin-bottom: 20px;
+    margin: 24px;
+    margin-top: 32px;
+    margin-bottom: 0;
 }
 
 .submissionOutlineHeader {
@@ -58,7 +42,7 @@ h1 {
 }
 
 .submissionOutline--section {
-    margin-top: 20px;
+    margin-bottom: 18px;
 }
 
 .submissionOutine--sectionHeading {
@@ -73,12 +57,57 @@ h1 {
     margin-bottom: 10px;
 }
 
+.content {
+    width: 70%;
+    padding: 20px;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    position: relative; /* Add relative positioning */
+}
+
+.content .placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+    color: #6c757d;
+    text-align: center;
+    cursor: pointer;
+}
+
+h1, h2, h3 {
+    font-size: 1.2rem;
+    color: #343a40;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+h2 {
+    font-size: 0.5rem;
+}
+
+.pageHeading {
+    font-size: 1.0rem;
+    padding-bottom: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+
+
 #student-name, #total-points, #autograder-score {
     font-size: 1rem;
     margin-bottom: 10px;
 }
 
-ul {
+ul, ol {
     list-style: none;
 }
 
@@ -103,24 +132,29 @@ a {
     font-size: 1.1rem;
     font-weight: bold;
     padding: 10px;
-    background-color: #e9ecef;
+    background-color: #F9F9F9;
     border: 1px solid #d3d3d3;
     display: flex;
     justify-content: space-between;
 }
 
 .testCase-failed .testCase--header {
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
+    color: red;
 }
 
 .testCase-passed .testCase--header {
-    background-color: #d4edda;
-    border-color: #c3e6cb;
+    color: green;
+}
+
+/* Remove hyperlink color and underline */
+.testCase--header a {
+    color: inherit; /* Inherit color from parent */
+    text-decoration: none; /* Remove underline */
 }
 
 .testCase--body {
-    background-color: #f8f9fa;
+    background-color: #FFFFFF;
+    
     padding: 15px;
     border: 1px solid #d3d3d3;
     font-family: monospace;
@@ -133,6 +167,24 @@ pre code {
     display: block;
     white-space: pre-wrap;
     word-wrap: break-word;
+}
+
+.fixed-bottom {
+    position: fixed;
+    height: 54px;
+    bottom: 0;
+    width: 100%;
+    background-color: #f4f5f7;
+    border-top: 1px solid #d3d3d3;
+    padding: 10px;
+    text-align: right;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.fixed-bottom button {
+    font-size: 1rem;
+    padding: 5px;
+    cursor: pointer;
 }
 
 /* Flex spacing */

@@ -4,82 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Autograder Results</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <section class="sidebar">
-            <div class="submissionOutline">
-                <div class="submissionOutlineHeader">
-                    <h1 id="submissionOutlineHeader--assignmentTitle">NULL Assignment</h2>
-                </div>
-                <div class="submissionOutline--section">
-                    <h2 class="submissionOutine--sectionHeading">Student</h2>
-                    <ul>
-                        </li id="submissionOutline--groupMember">Unknown Student (removed from roster?)</li>
-                    </ul>
-                </div>
-                <div class="submissionOutine--section">
-                    <h2 class="submissionOutine--sectionHeading">Total Points</h2>
-                    <p class="submissionOutlineHeader--totalPoints">
-                        13
-                        /
-
-                        0 pts</p>
-                </div>
-                <ol>
-                    <li class="submissionOutline--section">
-                        <div class="submissionOutline--section">
-                            <h2 class="submissionOutine--sectionHeading">Autograder Score
-                                <div class="submissionOutlineHeader--totalPoints">
-                                    13.0
-                                    /
-                                    0.0
-                                </div>
-                            </h2>
-                        </div>
-                        <div class="submissionOutline--section">
-                            <h3 class="submissionOutline--sectionHeading">Failed Tests</h3>
-                            <ol>
-                                <li class="submissionOutlineTestCases--failed">
-                                    <a href="#Testing The Distnce Calculation In Meters">Testing The Distnce Calculation In Meters (4/5)</a>
-                                </li>
-                                <li class="submissionOutlineTestCases--failed">
-                                    <a href="#Test Output Format 1">Test Output Format 1 (0/8)</a>
-                                </li>
-                            </ol>
-                        </div>
-                        <div class="submissionOutline--section">
-                            <h3 class="submissionOutline--sectionHeading">Failed Tests</h3>
-                            <ol>
-                                <li class="submissionOutlineTestCases--passed">
-                                    <a href="#Testing The Distnce Calculation In Meters">Testing The Distnce Calculation In Meters (5/5)</a>
-                                </li>
-                                <li class="submissionOutlineTestCases--passed">
-                                    <a href="#Test Output Format 1">Test Output Format 1 (8/8)</a>
-                                </li>
-                            </ol>
-                        </div>
-                    </li>
-                        
-                </ol>
-            </div>
-            
-            <p id="student-name">Student: NULL</p>
-            <p>Total Points: <span id="total-points"></span></p>
-            <p>Autograder Score: <span id="autograder-score"></span></p>
-            <p>Failed Tests:</p>
-            <ul id="failed-tests"></ul>
-            <p>Passed Tests:</p>
-            <ul id="passed-tests"></ul>
-        </section>
-
-        <section class="content hidden">
-            <div class="programmingAssignmentSubmissionViewer">
-                <h2 class="pageHeding">Autograder Results</h2>
+        <section class="content">
+            <div class="placeholder" id="placeholder">Click to load results.json</div>
+            <div class="programmingAssignmentSubmissionViewer hidden">
+                <h2 class="pageHeading">Autograder Results</h2>
                 <section class="pageSection">
-                    <ol>
-                        <li class="testCase">
+                    <ol class="testCases">
+                        <!-- <li class="testCase autograder-output">
                             <div class="testCase--header" title="only visible to instructors (for debugging purposes)">Autograder Output (hidden from students)</div>
                             <div class="testCase--body">
                                 <pre>
@@ -124,14 +62,69 @@
                                     </code>
                                 </pre>
                             </div>
-                        </li>
+                        </li> -->
                     </ol>
                 </section>
             </div>
-        <section>
+        </section>
+
+        <section class="sidebar">
+            <div class="submissionOutline">
+                <div class="submissionOutlineHeader">
+                    <h1 id="submissionOutlineHeader--assignmentTitle">NULL Assignment</h2>
+                </div>
+                <div class="submissionOutline--section">
+                    <h2 class="submissionOutine--sectionHeading">Student</h2>
+                    <ul>
+                        </li id="submissionOutline--groupMember">Unknown Student (removed from roster?)</li>
+                    </ul>
+                </div>
+                <div class="submissionOutine--section">
+                    <h2 class="submissionOutine--sectionHeading">Total Points</h2>
+                    <p class="submissionOutlineHeader--totalPoints"></p>
+                </div>
+                <ol>
+                    <li class="submissionOutline--section">
+                        <div class="submissionOutline--section">
+                            <h2 class="submissionOutine--sectionHeading">Autograder Score
+                                <div class="submissionOutlineHeader--totalPoints"></div>
+                            </h2>
+                        </div>
+                        <div class="submissionOutline--section">
+                            <h3 class="submissionOutline--sectionHeading">Failed Tests</h3>
+                            <ol class="submissionOutline--failedTests">
+                                <!-- <li class="submissionOutlineTestCases--failed">
+                                    <a href="#Testing The Distnce Calculation In Meters">Testing The Distnce Calculation In Meters (4/5)</a>
+                                </li>
+                                <li class="submissionOutlineTestCases--failed">
+                                    <a href="#Test Output Format 1">Test Output Format 1 (0/8)</a>
+                                </li> -->
+                            </ol>
+                        </div>
+                        <div class="submissionOutline--section">
+                            <h3 class="submissionOutline--sectionHeading">Passed</h3>
+                            <ol class="submissionOutine--passedTests">
+                                <!-- <li class="submissionOutlineTestCases--passed">
+                                    <a href="#Testing The Distnce Calculation In Meters">Testing The Distnce Calculation In Meters (5/5)</a>
+                                </li>
+                                <li class="submissionOutlineTestCases--passed">
+                                    <a href="#Test Output Format 1">Test Output Format 1 (8/8)</a>
+                                </li> -->
+                            </ol>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+      
     </div>
 
-    <!-- <input type="file" id="fileInput" accept=".json"> -->
+    <div class="fixed-bottom">
+        <button id="loadFileButton">Load results.json</button>
+        <input type="file" id="fileInput" accept=".json" style="display: none;">
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
